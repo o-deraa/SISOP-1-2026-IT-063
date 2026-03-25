@@ -43,7 +43,7 @@ NR > 1 {
 	} 
 	else if(input == "d" ) {count++; total+=$2}
 	else if(input == "e") {
-		if ($4 == "Business") {count_class++}
+		if ($3 == "Business") {count_class++}
 	}  
 } END {
 	if (input == "a") print "Jumlah seluruh penumpang KANJ adalah" ,count, "orang"
@@ -88,7 +88,7 @@ else if (input == "d") print "Rata-rata usia penumpang adalah" ,int(total/count)
 5. Mencari jumlah penumpang business class (input = e)
 ```bash
 else if(input == "e") {
-		if ($4 == "Business") {count_class++}
+		if ($4 = "Business") {count_class++}
 	}  
 ...
 else if(input == "e") print "Jumlah penumpang business class ada" ,count_class, "orang"
@@ -101,6 +101,9 @@ else {
     print "Contoh format: awk -f KANJ.sh passenger.csv a"
 }
 ```
+
+Berikut adalah screenshot jawaban dari soal 1
+![alt text](assets/jawaban_soal1.png)
 
 
 ## SOAL 2 -  EKSPEDISI PESUGIHAN GUNUNG KAWI - MAS AMBA
