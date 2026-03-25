@@ -25,6 +25,12 @@ Adapun penyelesaian dari soal 1 yakni sebagai berikut:
 ```bash
 wgets "passenger.csv" "https://docs.google.com/spreadsheets/d/1NHmyS6wRO7To7ta-NLOOLHkPS6valvNaX7tawsv1zfE/export?format=csv&gid=0"
 ```
+
+- Dengan melihat isi file `passenger.csv`, kita dapat mengetahui bahwa isi file adalah:
+    - Kolom 1: nama penumpang
+    - Kolom 2: usia
+    - Kolom 3: kursi kelas
+    - Kolom 4: gerbong
 - Penyelesaian soal 1
 ```bash
 #!/bin/bash
