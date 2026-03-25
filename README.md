@@ -1,6 +1,6 @@
 # SISOP-1-2026-IT-063
 
-## Dewa Ngakan Gede Wwira Adhimukti (5027251063)
+## Dewa Ngakan Gede Wira Adhimukti (5027251063)
 
 ## SOAL 1 - ARGO NGAWI JESGEJES
 
