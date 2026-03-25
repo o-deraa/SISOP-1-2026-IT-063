@@ -88,7 +88,7 @@ else if (input == "d") print "Rata-rata usia penumpang adalah" ,int(total/count)
 5. Mencari jumlah penumpang business class (input = e)
 ```bash
 else if(input == "e") {
-		if ($4 = "Business") {count_class++}
+		if ($3 == "Business") {count_class++}
 	}  
 ...
 else if(input == "e") print "Jumlah penumpang business class ada" ,count_class, "orang"
