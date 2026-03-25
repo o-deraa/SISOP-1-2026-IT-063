@@ -12,7 +12,7 @@ Pada soal 1 diminta untuk mencari dan menampilkan:
 5. Jumlah penumpang business class
 
 
-Akan terdapat 2 file pada soal 1, yakni `KANJ.sh` dan  `passenger.csv'
+Nantinya akan terdapat 2 file pada soal 1, yakni `KANJ.sh` dan      `passenger.csv`
 
 
 Contoh format input nantinya yaitu:
@@ -114,27 +114,29 @@ Berikut adalah screenshot jawaban dari soal 1
 
 ## SOAL 2 -  EKSPEDISI PESUGIHAN GUNUNG KAWI - MAS AMBA
 
-Pada soal ini, kita diminta untuk mengunduh file `peta-ekspedisi-amba.pdf` menggunakan `gdown`
+Pada soal ini, pertama-tama kita diminta untuk mengunduh file `peta-ekspedisi-amba.pdf` menggunakan `gdown`
 
 ```sh
 gdown "peta-ekspedisi-amba.pdf" "https://drive.google.com/uc?id=1q10pHSC3KFfvEiCN3V6PTroPR7YGHF6Q"
 ```
 
-Setelah file pdf diunduh, file tersebut dibuka menggunakan `cat` untuk melihat isi filenya.
+Setelah file pdf tersebut diunduh, file dibuka menggunakan `cat` untuk melihat isi filenya.
 
 ```sh
 cat peta-ekspedisi-amba.pdf
 ```
 
-Pada bagian bawah hasil nantinya akan ditemukan link menuju repo GitHub.
+Pada bagian bawah dari hasil `cat`, nantinya akan ditemukan link menuju repo GitHub.
 
 ![hasil cat](assets/image.png)
+
+Selanjutnya, file tersebut perlu di-clone ke dalam penyimpanan local.
 ```
 git clone https://github.com/
 pocongcyber77/peta-gunung-kawi.git
 ```
 
-Setelah repo tersebut di-clone, maka akan didapat folder bernama `peta-gunung-kawi`. Folder tersebut berisi 1 file bernama `gsxtrack.json`. Berikut adalah isi dari file `gsxtrack.json`
+Setelah repo tersebut di-clone, akan didapat folder bernama `peta-gunung-kawi`. Folder tersebut berisi 1 file bernama `gsxtrack.json`. Berikut adalah isi dari file `gsxtrack.json` tersebut:
 
 ```bash
 {
@@ -216,7 +218,7 @@ Setelah repo tersebut di-clone, maka akan didapat folder bernama `peta-gunung-ka
 }
 
 ```
-Soal lalu meminta untuk membuat shell script dengan nama `parserkoordinat.sh` untuk mengambil beberapa titik lokasi yang ada pada file `gsxtrack.json`. Hasil nantinya disusun dengan format `id, site_nama, latitude, langitude`. Hasil lalu disimpan ke dalam file `titik-penting.txt`. Berikut adalah isi dari file `paserkoordinat.sh` yang digunakan utnuk mengambil titik - titik lokasi pada file `gsxtrack.json`:
+Soal lalu meminta untuk membuat shell script dengan nama `parserkoordinat.sh` untuk mengambil beberapa titik lokasi yang ada pada file `gsxtrack.json`. Nantinya, hasil akan disusun dengan format `id, site_nama, latitude, langitude` lalu disimpan ke dalam file `titik-penting.txt`. Berikut adalah isi dari file `paserkoordinat.sh` yang digunakan utnuk mengambil titik - titik lokasi pada file `gsxtrack.json`:
 
 ```bash
 #!/bin/bash
@@ -234,7 +236,7 @@ awk '
 ' gsxtrack.json > titik-penting.txt
 ```
 
-Nantinya akan terdapat total 4 titik lokasi yang berhasil diambil dan disimpan pada file `titik-lokasi.txt`, yakni:
+Setelah program di atas dijalankan, akan terdapat total 4 titik lokasi yang berhasil diambil dan disimpan pada file `titik-lokasi.txt`, yakni:
 
 ![lokasi](assets/image2.png)
 
@@ -259,7 +261,7 @@ Adapun hasil dan jawaban dari koordinat pusat tersebut adalah:
 
 ## SOAL 3 - KOS SLEBEW AMBATUKAM
 
-Pada soal 3, kita diminta untuk membuat suatu sistem informasi manajemen kos yang menu utamanya berisi:
+Pada soal 3, soal meminta untuk membuat suatu sistem informasi manajemen kos yang menu utamanya berisi:
 
 1. Tambah Penghuni Baru
 2. Hapus Penghuni
