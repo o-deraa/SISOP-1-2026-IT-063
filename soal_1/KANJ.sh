@@ -18,7 +18,7 @@ NR > 1 {
 	}  
 } END {
 	if (input == "a") print "Jumlah seluruh penumpang KANJ adalah" ,count, "orang"
-	else if (input =="b") print "Jumlah gerbong penumpang KANJ adalah" ,length(gerbong)
+	else if (input =="b") print "Jumlah gerbong penumpang KANJ adalah" ,length(gerbong)-1
 	else if(input =="c") print name, "adalah penumpang tertua dengan usia", oldest, "tahun"
 	else if (input == "d") print "Rata-rata usia penumpang adalah" ,int(total/count), "tahun"
 	else if(input == "e") print "Jumlah penumpang business class ada" ,count_class, "orang"

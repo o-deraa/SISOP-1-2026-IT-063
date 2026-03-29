@@ -32,8 +32,6 @@ tambah_penghuni(){
     
     file="data/penghuni.csv"
 
-    mkdir -p data
-
     if [ ! -s "$file" ]; then
         printf "id,nama,kamar,harga_sewa,tanggal_masuk,status\n" > "$file"
     fi 
@@ -148,8 +146,6 @@ hapus_penghuni(){
     file="data/penghuni.csv"
     history="sampah/history_hapus.csv"
 
-    mkdir -p sampah
-
     # header 
 
     if [ ! -s "$history" ]; then
@@ -236,7 +232,6 @@ tampilkan_penghuni(){
         harga=$4
         status=$6
 
-        # padding manual (sederhana)
         while(length(nama) < 20) nama=nama " "
         while(length(kamar) < 7) kamar=kamar " "
         while(length(harga) < 10) harga=harga " "
@@ -348,7 +343,6 @@ cetak_laporan(){
 
     laporan="rekap/laporan_bulanan.txt"
 
-    mkdir -p rekap
 
     tanggal_laporan=$(date "+%Y-%m-%d %H:%M:%S")
     {
@@ -416,9 +410,6 @@ cetak_laporan(){
 check_tagihan(){
     file="data/penghuni.csv"
     log="log/tagihan.log"
-
-    mkdir -p log
-
     tanggal=$(date "+%Y-%m-%d %H:%M:%S")
 
     {
@@ -614,6 +605,11 @@ done
 cron_default
 while true; do
     clear
+    mkdir -p data
+    mkdir -p log
+    mkdir -p rekap
+    mkdir -p sampah
+
     menu
     read -p "Masukkan opsi [1-7]: " choice
     case $choice in

@@ -32,84 +32,85 @@ wgets "passenger.csv" "https://docs.google.com/spreadsheets/d/1NHmyS6wRO7To7ta-N
     - Kolom 3: kursi kelas
     - Kolom 4: gerbong
 - Penyelesaian soal 1
-```bash
-#!/bin/bash
+    ```bash
+    #!/bin/bash
 
-BEGIN {
-	FS =  ","
-	input = ARGV[2]
-	delete ARGV[2]
-}	
+    BEGIN {
+        FS =  ","
+        input = ARGV[2]
+        delete ARGV[2]
+    }	
 
-NR > 1 {
-	if (input == "a") count++
-	else if(input == "b") gerbong[$4]++
-	else if(input == "c") {
-		if ($2 > oldest) {oldest = $2; name = $1}
-	} 
-	else if(input == "d" ) {count++; total+=$2}
-	else if(input == "e") {
-		if ($3 == "Business") {count_class++}
-	}  
-} END {
-	if (input == "a") print "Jumlah seluruh penumpang KANJ adalah" ,count, "orang"
-	else if (input =="b") print "Jumlah gerbong penumpang KANJ adalah" ,length(gerbong)
-	else if(input =="c") print name, "adalah penumpang tertua dengan usia", oldest, "tahun"
-	else if (input == "d") print "Rata-rata usia penumpang adalah" ,int(total/count), "tahun"
-	else if(input == "e") print "Jumlah penumpang business class ada" ,count_class, "orang"
-	else print "Soal tidak dikenali. Gunakan a, b ,c ,d, atau e."
-}
-```
+    NR > 1 {
+        if (input == "a") count++
+        else if(input == "b") gerbong[$4]++
+        else if(input == "c") {
+            if ($2 > oldest) {oldest = $2; name = $1}
+        } 
+        else if(input == "d" ) {count++; total+=$2}
+        else if(input == "e") {
+            if ($3 == "Business") {count_class++}
+        }  
+    } END {
+        if (input == "a") print "Jumlah seluruh penumpang KANJ adalah" ,count, "orang"
+        else if (input =="b") print "Jumlah gerbong penumpang KANJ adalah" ,length(gerbong)-1
+        else if(input =="c") print name, "adalah penumpang tertua dengan usia", oldest, "tahun"
+        else if (input == "d") print "Rata-rata usia penumpang adalah" ,int(total/count), "tahun"
+        else if(input == "e") print "Jumlah penumpang business class ada" ,count_class, "orang"
+        else print "Soal tidak dikenali. Gunakan a, b ,c ,d, atau e."
+    }
+    ```
 - Di bagian `BEGIN` , ditulis dulu `Field Separator` untuk data pada file `passenger.csv` yakni berupa koma.
 - Berdasarkan format input yang sudah disebutkan sebelumnya, dapat diektahui bahwa kode nanti akan menjalanlan program pada `KANJ.sh`, membuka file `passenger.csv`, dan menerima suatu argumen berupa a/b/c/d/e. Argumen tersebut akan disimpan dalam variabel `input` di dalam program `KANJ.sh`.
 - Program akan mencari data dengan melewati header, oleh karena itu `NR>1`
 1. Mencari dan menampilkan jumlah penumpang (input = a)
-```bash
-if (input == "a") count++
-...
-if (input == "a") print "Jumlah seluruh penumpang KANJ adalah" ,count, "orang"
-```
+    ```bash
+    if (input == "a") count++
+    ...
+    if (input == "a") print "Jumlah seluruh penumpang KANJ adalah" ,count, "orang"
+    ```
 2. Mencari dan menampilkan jumlah gerbong yang beroperasi (input = b)
-```bash
-else if(input == "b") gerbong[$4]++
-...
-else if (input =="b") print "Jumlah gerbong penumpang KANJ adalah" ,length(gerbong)
-```
+    ```bash
+    else if(input == "b") gerbong[$4]++
+    ...
+    else if (input =="b") print "Jumlah gerbong penumpang KANJ adalah" ,length(gerbong)-1
+    ```
 3. Mencari dan menampilkan siapa dan berapa umur penumpang tertua (input = c)
-```bash
-else if(input == "c") {
-		if ($2 > oldest) {oldest = $2; name = $1}
-	}
-...
-else if(input =="c") print name, "adalah penumpang tertua dengan usia", oldest, "tahun"
-```
+    ```bash
+    else if(input == "c") {
+            if ($2 > oldest) {oldest = $2; name = $1}
+        }
+    ...
+    else if(input =="c") print name, "adalah penumpang tertua dengan usia", oldest, "tahun"
+    ```
 
 4. Mencari rata - rata usia penumpang (input = d)
-```bash
-else if(input == "d" ) {count++; total+=$2}
-...
-else if (input == "d") print "Rata-rata usia penumpang adalah" ,int(total/count), "tahun"
-```
+    ```bash
+    else if(input == "d" ) {count++; total+=$2}
+    ...
+    else if (input == "d") print "Rata-rata usia penumpang adalah" ,int(total/count), "tahun"
+    ```
 
 5. Mencari jumlah penumpang business class (input = e)
-```bash
-else if(input == "e") {
-		if ($3 == "Business") {count_class++}
-	}  
-...
-else if(input == "e") print "Jumlah penumpang business class ada" ,count_class, "orang"
-```
+    ```bash
+    else if(input == "e") {
+            if ($3 == "Business") {count_class++}
+        }  
+    ...
+    else if(input == "e") print "Jumlah penumpang business class ada" ,count_class, "orang"
+    ```
 
 6. Jika input tidak berupa a/b/c/d/e
-```bash
-else {
-    print "Soal tidak dikenali. Gunakan a, b ,c ,d, atau e."
-    print "Contoh format: awk -f KANJ.sh passenger.csv a"
-}
-```
+    ```bash
+    else {
+        print "Soal tidak dikenali. Gunakan a, b ,c ,d, atau e."
+        print "Contoh format: awk -f KANJ.sh passenger.csv a"
+    }
+    ```
 
 Berikut adalah screenshot jawaban dari soal 1
 ![alt text](assets/jawaban_soal1.png)
+
 
 
 ## SOAL 2 -  EKSPEDISI PESUGIHAN GUNUNG KAWI - MAS AMBA
@@ -301,6 +302,10 @@ EOF
 
 while true; do
     clear
+    mkdir -p data
+    mkdir -p log
+    mkdir -p rekap
+    mkdir -p sampah
     cron_default
     menu
     read -p "Masukkan opsi [1-7]: " choice
@@ -347,6 +352,21 @@ Jika angka di luar opsi dimasukkan, maka program akan memunculkan pesan sebagai 
 
  ![alt text](<assets/image5.png>)
 
+ ### Inisialisasi Folder
+ Program akan otomatis membuat foler `data`, `log`, `rekap`, dan `sampah` ketika dijalankan.
+
+ ```bash
+    while true; do
+        clear
+        mkdir -p data
+        mkdir -p log
+        mkdir -p rekap
+        mkdir -p sampah
+        cron_default
+        menu
+    ...
+ ```
+
 
  ### Menu 1 - Tambah Penghuni Baru
  Pada menu ini, program akan menambahkan data penghuni baru ke database `penghuni.csv` pada folder `data`. Program akan meminta input berupa nama, nomor kamar yang akan ditempati, harga sewa per bulan, tanggal masuk ke kos, dan status awal saat masuk ke kos (aktif/menunggak). Beberapa validasi yang digunakan pada menu ini yaitu:
@@ -364,8 +384,6 @@ tambah_penghuni(){
     echo "======================================"
     
     file="data/penghuni.csv"
-
-    mkdir -p data
 
     if [ ! -s "$file" ]; then
         printf "id,nama,kamar,harga_sewa,tanggal_masuk,status\n" > "$file"
@@ -480,137 +498,134 @@ tambah_penghuni(){
  ```
 - Pertama - tama, ditentukan dulu lokasi file yang akan ditentukan sebagai database, memastikan foldernya ada, dan mengecek apakah file database kosong atau belum ada. Jika kosong maka akan dibuat header pada database tersebut
 
-```bash
-    file="data/penghuni.csv"
-
-    mkdir -p data
-
-    if [ ! -s "$file" ]; then
-        printf "id,nama,kamar,harga_sewa,tanggal_masuk,status\n" > "$file"
-    fi 
-```
+    ```bash
+        file="data/penghuni.csv"
+        if [ ! -s "$file" ]; then
+            printf "id,nama,kamar,harga_sewa,tanggal_masuk,status\n" > "$file"
+        fi 
+    ```
 
 - Input dan validasi nama
-```bash
-    while true; do
-        read -p "Masukkan Nama: " nama
+    ```bash
+        while true; do
+            read -p "Masukkan Nama: " nama
 
-        if [[ ! "$nama" =~ ^[A-Za-z\ ]+$ ]]; then
-            echo "Nama hanya boleh huruf dan spasi!"
-        else
-            break
-        fi
-    done
-```
+            if [[ ! "$nama" =~ ^[A-Za-z\ ]+$ ]]; then
+                echo "Nama hanya boleh huruf dan spasi!"
+            else
+                break
+            fi
+        done
+    ```
 Di bagian nama, validasi yang dipakai adalah memastikan bahwa input yang diterima hanya berupa huruf.
 
 - Input dan validasi nomor kamar
-```bash
-    while true; do
-        read -p "Masukkan Nomor Kamar: " kamar
-        if ! [[ "$kamar" =~ ^[0-9]+$ ]]; then
-            echo "Nomor kamar harus berupa angka!"
-            continue
-        fi
+    ```bash
+        while true; do
+            read -p "Masukkan Nomor Kamar: " kamar
+            if ! [[ "$kamar" =~ ^[0-9]+$ ]]; then
+                echo "Nomor kamar harus berupa angka!"
+                continue
+            fi
 
-        if [ "$kamar" -le 0 ]; then
-            echo "Nomor kamar harus lebih dari 0!"
-            continue
-        fi
+            if [ "$kamar" -le 0 ]; then
+                echo "Nomor kamar harus lebih dari 0!"
+                continue
+            fi
 
-        if awk -F',' -v k="$kamar" 'NR>1 && $3==k {found=1} END{exit !found}' "$file"; then
-            echo "Kamar sudah terisi! Pilih nomor lain."
-        else
-            break
-        fi
-    done
-```
-Di bagian nomor kamar, valdiasi digunakan untuk memastikan bahwa input harus berupa angka, tidak boleh negatif, dan nomor kamar belum ada yang menempati dengan cara memeriksa file database.
+            if awk -F',' -v k="$kamar" 'NR>1 && $3==k {found=1} END{exit !found}' "$file"; then
+                echo "Kamar sudah terisi! Pilih nomor lain."
+            else
+                break
+            fi
+        done
+    ```
+    Di bagian nomor kamar, valdiasi digunakan untuk memastikan bahwa input harus berupa angka, tidak boleh negatif, dan nomor kamar belum ada yang menempati dengan cara memeriksa file database.
 
 - Input dan validasi harga
-```bash
-    while true; do
-        read -p "Masukkan Harga Sewa: " harga_sewa
+    ```bash
+        while true; do
+            read -p "Masukkan Harga Sewa: " harga_sewa
 
-        if ! [[ "$harga_sewa" =~ ^-?[0-9]+$ ]]; then
-            echo "Harus angka!"
-            continue
-        fi
+            if ! [[ "$harga_sewa" =~ ^-?[0-9]+$ ]]; then
+                echo "Harus angka!"
+                continue
+            fi
 
-        if [ "$harga_sewa" -le 0 ]; then
-            echo "Harga harus lebih dari 0!"
-        else
-            break
-        fi
-    done  
-```
-Di bagian harga, validasi digunakan untuk memastikan bahwa input harus berupa angka dan tidak boleh negatif.
+            if [ "$harga_sewa" -le 0 ]; then
+                echo "Harga harus lebih dari 0!"
+            else
+                break
+            fi
+        done  
+    ```
+    Di bagian harga, validasi digunakan untuk memastikan bahwa input harus berupa angka dan tidak boleh negatif.
 - Input dan validasi tanggal
-```bash
+    ```bash
 
-    while true
-    do 
-        read -p "Masukkan Tanggal Masuk (YYYY-MM-DD): " tanggal_masuk
-        # cek format
-        [[ "$tanggal_masuk" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]] || {
-            echo "Format tanggal tidak valid"
-            continue
-        }
+        while true
+        do 
+            read -p "Masukkan Tanggal Masuk (YYYY-MM-DD): " tanggal_masuk
+            # cek format
+            [[ "$tanggal_masuk" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]] || {
+                echo "Format tanggal tidak valid"
+                continue
+            }
 
-        # cek apakah tanggal valid 
-        tanggal_num=$(date -d "$tanggal_masuk" +%Y%m%d 2>/dev/null) || {
-            echo "Tanggal tidak valid"
-            continue
-        }
+            # cek apakah tanggal valid 
+            tanggal_num=$(date -d "$tanggal_masuk" +%Y%m%d 2>/dev/null) || {
+                echo "Tanggal tidak valid"
+                continue
+            }
 
-        today_num=$(date +%Y%m%d)
+            today_num=$(date +%Y%m%d)
 
-        # cek apakah tanggal di masa depan
-        if (( tanggal_num > today_num )); then
-            echo "Tanggal tidak boleh melebihi hari ini"
-            continue
-        fi
+            # cek apakah tanggal di masa depan
+            if (( tanggal_num > today_num )); then
+                echo "Tanggal tidak boleh melebihi hari ini"
+                continue
+            fi
 
-        break
-    done
-```
-Di bagian tanggal, validasi digunakan untuk memastikan bahwa input harus menggunakan format YYYY-MM-DD dan tanggal yang dimasukkan tidak boleh melebihi tanggal hari ini.
+            break
+        done
+    ```
+    Di bagian tanggal, validasi digunakan untuk memastikan bahwa input harus menggunakan format YYYY-MM-DD dan tanggal yang dimasukkan tidak boleh melebihi tanggal hari ini.
 
 - Input dan validasi status
-```bash
-    while true
-    do
-        read -p "Masukkan Status Awal (Aktif/Menunggak): " status_awal
-        if [[ $status_awal == "Aktif" || $status_awal == "Menunggak" ]]; then
-            break
-        else
-            echo 'Format tidak valid! Silakan tulis "Aktif" atau "Menunggak"'
-        fi
-    done
-```
-Di bagian status, validasi digunakan untuk memastikan input hanya menerima "Aktif/Menunggak" saja (dibuat case sensitive).
+    ```bash
+        while true
+        do
+            read -p "Masukkan Status Awal (Aktif/Menunggak): " status_awal
+            if [[ $status_awal == "Aktif" || $status_awal == "Menunggak" ]]; then
+                break
+            else
+                echo 'Format tidak valid! Silakan tulis "Aktif" atau "Menunggak"'
+            fi
+        done
+    ```
+    Di bagian status, validasi digunakan untuk memastikan input hanya menerima "Aktif/Menunggak" saja (dibuat case sensitive).
 
 - Menyimpan input ke database
-```bash
-    last_id=$(tail -n 1 "$file" | cut -d',' -f1)
+    ```bash
+        last_id=$(tail -n 1 "$file" | cut -d',' -f1)
 
-    if [[ "$last_id" =~ ^[0-9]+$ ]]; then
-        new_id=$((last_id + 1))
-    else
-        new_id=1
-    fi
+        if [[ "$last_id" =~ ^[0-9]+$ ]]; then
+            new_id=$((last_id + 1))
+        else
+            new_id=1
+        fi
 
-    echo "$new_id,$nama,$kamar,$harga_sewa,$tanggal_masuk,$status_awal" >> "$file"
-```
-Setelah semua input sesuai dengan aturan, maka input akan dikirim ke database dengan dengan `id` yang dihasilkan secara otomatis menggunakan mekanisme auto-increment.
+        echo "$new_id,$nama,$kamar,$harga_sewa,$tanggal_masuk,$status_awal" >> "$file"
+    ```
+    Setelah semua input sesuai dengan aturan, maka input akan dikirim ke database dengan dengan `id` yang dihasilkan secara otomatis menggunakan mekanisme auto-increment.
 
 - Tampilan dan contoh input ada menu tambahkan penghuni 
 
-![alt text](<assets/contoh_input.png>)
+    ![alt text](<assets/contoh_input.png>)
 
 - Contoh isi dari file database `penghuni.csv` setelah data input dikirim.
 
-![alt text](<assets/hasil_input.png>) 
+    ![alt text](<assets/hasil_input.png>) 
 
 ### Menu 2 - Hapus Penghuni
 
@@ -621,10 +636,7 @@ hapus_penghuni(){
     file="data/penghuni.csv"
     history="sampah/history_hapus.csv"
 
-    mkdir -p sampah
-
     # header 
-
     if [ ! -s "$history" ]; then
         printf "id,nama,kamar,harga_sewa,tanggal_masuk,status,tanggal_hapus\n" > "$history"
     fi
@@ -687,8 +699,6 @@ Pertama- tama, dilakukan inisisalisasi file database dan file untuk menyimpan ri
 ```bash
 file="data/penghuni.csv"
 history="sampah/history_hapus.csv"
-
-mkdir -p sampah
 ```
 
 Setelah itu. dilakukan inisialisasi header pada `history`, overwrite jika file kosong.
@@ -785,7 +795,6 @@ tampilkan_penghuni(){
         harga=$4
         status=$6
 
-        # padding manual (sederhana)
         while(length(nama) < 20) nama=nama " "
         while(length(kamar) < 7) kamar=kamar " "
         while(length(harga) < 10) harga=harga " "
@@ -978,9 +987,6 @@ cetak_laporan(){
     fi
 
     laporan="rekap/laporan_bulanan.txt"
-
-    mkdir -p rekap
-
     tanggal_laporan=$(date "+%Y-%m-%d %H:%M:%S")
     {
         echo "======================================================"
@@ -1065,8 +1071,6 @@ Selanjutnya, dilakukan inisialisasi file untuk menyimpan hasil laporan bulanan
 
 ```bash
     laporan="rekap/laporan_bulanan.txt"
-
-    mkdir -p rekap
 ```
 Selanjutnya, akan dibuat rekap laporan keuangan yang berisi informasi berupa tanggal perekapan, total penghuni, total kamar yang dipakai, total pendapatan, total tunggakan, dan informasi mengenai penghuni yang menungggak.
 ```bash
@@ -1202,9 +1206,6 @@ Pertama - tama dilakukan insialisasi untuk sistem pengecekan penghuni yang menun
 check_tagihan(){
     file="data/penghuni.csv"
     log="log/tagihan.log"
-
-    mkdir -p log
-
     tanggal=$(date "+%Y-%m-%d %H:%M:%S")
 
     {
@@ -1268,126 +1269,152 @@ cron_default(){
 ```
 - Melihat jadwal aktif
 
-```bash
-lihat_cron(){
-    echo "============================================="
-    echo "     --- Cron Job Pengingat Tagihan ---"
-    echo "============================================="
-    
-    crontab -l 2>/dev/null | grep -- "--check--tagihan"
+    ```bash
+    lihat_cron(){
+        echo "============================================="
+        echo "     --- Cron Job Pengingat Tagihan ---"
+        echo "============================================="
+        
+        crontab -l 2>/dev/null | grep -- "--check--tagihan"
 
-    if [ $? -ne 0 ]; then
-        echo "(Tidak ada jadwal aktif)"
-    fi
+        if [ $? -ne 0 ]; then
+            echo "(Tidak ada jadwal aktif)"
+        fi
 
-    echo
-    read -p "Tekan [ENTER] untuk melanjutkan..."
-}
-```
+        echo
+        read -p "Tekan [ENTER] untuk melanjutkan..."
+    }
+    ```
 
-Berikut adalah tampilan ketika menu `Lihat Cron Job Aktif` digunakan:
+    Berikut adalah tampilan ketika menu `Lihat Cron Job Aktif` digunakan:
 
-![alt text](assets/lihat_cron.png)
+    ![alt text](assets/lihat_cron.png)
 
 - Membuat jadwal baru
-```bash
-tambah_cron(){
-    script_path="$(realpath "$0")"
+    ```bash
+    tambah_cron(){
+        script_path="$(realpath "$0")"
 
-    echo "============================================="
-    echo "     --- Menambahkan Jadwal Baru ---"
-    echo "============================================="
+        echo "============================================="
+        echo "     --- Menambahkan Jadwal Baru ---"
+        echo "============================================="
 
-    while true; do
-        read -p "Masukkan jam (0-23): " jam
+        while true; do
+            read -p "Masukkan jam (0-23): " jam
 
-        if ! [[ "$jam" =~ ^[0-9]+$ ]]; then
-            echo "Jam harus angka!"
-            continue
+            if ! [[ "$jam" =~ ^[0-9]+$ ]]; then
+                echo "Jam harus angka!"
+                continue
+            fi
+
+            if [ "$jam" -lt 0 ] || [ "$jam" -gt 23 ]; then
+                echo "Jam harus antara 0-23!"
+            else
+                break
+            fi
+        done
+
+        while true; do
+            read -p "Masukkan menit (0-59): " menit
+
+            if ! [[ "$menit" =~ ^[0-9]+$ ]]; then
+                echo "Menit harus angka!"
+                continue
+            fi
+
+            if [ "$menit" -lt 0 ] || [ "$menit" -gt 59 ]; then
+                echo "Menit harus antara 0-59!"
+            else
+                break
+            fi
+        done
+
+        echo
+        echo "Jadwal yang dipilih: $jam:$menit"
+
+        read -p "Yakin ingin menyimpan? (y/n): " confirm
+        if [[ "$confirm" != "y" && "$confirm" != "Y" ]]; then
+            echo "Dibatalkan."
+            read -p "Tekan [ENTER] untuk melanjutkan..."
+            return
         fi
 
-        if [ "$jam" -lt 0 ] || [ "$jam" -gt 23 ]; then
-            echo "Jam harus antara 0-23!"
-        else
-            break
-        fi
-    done
+        (crontab -l 2>/dev/null | grep -v -- "--check--tagihan"; echo "$menit $jam * * * $script_path --check--tagihan") | crontab -
 
-    while true; do
-        read -p "Masukkan menit (0-59): " menit
+        echo
+        echo "Cron berhasil disimpan!"
+        echo "Akan berjalan setiap hari pukul $jam:$menit"
 
-        if ! [[ "$menit" =~ ^[0-9]+$ ]]; then
-            echo "Menit harus angka!"
-            continue
-        fi
-
-        if [ "$menit" -lt 0 ] || [ "$menit" -gt 59 ]; then
-            echo "Menit harus antara 0-59!"
-        else
-            break
-        fi
-    done
-
-    echo
-    echo "Jadwal yang dipilih: $jam:$menit"
-
-    read -p "Yakin ingin menyimpan? (y/n): " confirm
-    if [[ "$confirm" != "y" && "$confirm" != "Y" ]]; then
-        echo "Dibatalkan."
+        echo
         read -p "Tekan [ENTER] untuk melanjutkan..."
-        return
-    fi
+    }
+    ```
+    Di dalam fungsi ini, diterapkan validasi untuk input nilai jam dan menit sebagai berikut:
 
-    (crontab -l 2>/dev/null | grep -v -- "--check--tagihan"; echo "$menit $jam * * * $script_path --check--tagihan") | crontab -
+    1. Jam hanya boleh dari rentang [0 - 24]
+    2. Menit hanya boleh dari rentang [0 - 60]
 
-    echo
-    echo "Cron berhasil disimpan!"
-    echo "Akan berjalan setiap hari pukul $jam:$menit"
+    Berikut adalah tampilan dari menu  `Daftarkan Cron Job Pengingat` digunakan:
 
-    echo
-    read -p "Tekan [ENTER] untuk melanjutkan..."
-}
-```
-Di dalam fungsi ini, diterapkan validasi untuk input nilai jam dan menit sebagai berikut:
-
-1. Jam hanya boleh dari rentang [0 - 24]
-2. Menit hanya boleh dari rentang [0 - 60]
-
-Berikut adalah tampilan dari menu  `Daftarkan Cron Job Pengingat` digunakan:
-
-![alt text](assets/buat_jadwal.png)
+    ![alt text](assets/buat_jadwal.png)
 
 - Menghapus jadwal yang ada
-```bash
-hapus_cron(){
-    script_path="$(realpath "$0")"
+    ```bash
+    hapus_cron(){
+        script_path="$(realpath "$0")"
 
-    echo "============================================="
-    echo "         --- Menghapus Jadwal ---"
-    echo "============================================="
+        echo "============================================="
+        echo "         --- Menghapus Jadwal ---"
+        echo "============================================="
 
-    read -p "Yakin ingin menghapus? (y/n): " confirm
-    if [[ "$confirm" != "y" && "$confirm" != "Y" ]]; then
-        echo "Dibatalkan."
+        read -p "Yakin ingin menghapus? (y/n): " confirm
+        if [[ "$confirm" != "y" && "$confirm" != "Y" ]]; then
+            echo "Dibatalkan."
+            read -p "Tekan [ENTER] untuk melanjutkan..."
+            return
+        fi
+
+
+        crontab -l 2>/dev/null | grep -v -- "--check--tagihan" | crontab -
+
+        echo "Jadwal berhasil dihapus."
+        echo
         read -p "Tekan [ENTER] untuk melanjutkan..."
-        return
-    fi
+    }
+    ```
+    Pada menu ini, program akan menghapus jadwal yang lama dan membuat jadwal menjadi kosong.
 
+    Berikut adalah tampilan menu `Hapus Cron Job Pengingat` ketika digunakan:
 
-    crontab -l 2>/dev/null | grep -v -- "--check--tagihan" | crontab -
-
-    echo "Jadwal berhasil dihapus."
-    echo
-    read -p "Tekan [ENTER] untuk melanjutkan..."
-}
-```
-Pada menu ini, program akan menghapus jadwal yang lama dan membuat jadwal menjadi kosong.
-
-Berikut adalah tampilan menu `Hapus Cron Job Pengingat` ketika digunakan:
-
-![delcron](assets/hapus_cron.png)
+    ![delcron](assets/hapus_cron.png)
 
 ### Menu 7 - Keluar
 Berikut adalah tampilan program ketika opsi untuk keluar dari menu dipilih:
 
 ![alt text](assets/keluar.png)
+
+## REVISI
+1. Perbaikan soal nomor 1 input 'b'. Hasil sebelum revisi adalah **5**, setelah direvisi menjadi **4**. Bagian kode yang diperbaiki:
+
+    Sebelum
+    ```bash
+    else if (input =="b") print "Jumlah gerbong penumpang KANJ adalah" ,length(gerbong)
+    ```
+
+    Sesudah
+    ```bash
+    else if (input =="b") print "Jumlah gerbong penumpang KANJ adalah" ,length(gerbong)-1
+    ```
+
+2. Perbaikin soal nomor 3 - Otomatis membuat folder `data`, `log`, `rekap`, dan `sampah` ketika dijalankan.
+    ```bash
+        while true; do
+            clear
+            mkdir -p data
+            mkdir -p log
+            mkdir -p rekap
+            mkdir -p sampah
+            cron_default
+            menu
+        ...
+    ```
